@@ -200,21 +200,18 @@ public:
     void checkSpecialCases( TA::Board enemyBoard ) 
     {
         // For special cases, attack diagonally to hit the center of the enemy's ship in at most three steps.
-        //bool found = false;
         for ( auto h : hit ) {
             int i = h.first;
             int j = h.second;
             // the edges of the board
             if ( i == 0 ) {
                 if ( j == 0 || ( j > 0 && j < enemyBoard.size() - 2 && enemyBoard[i][j - 1] == TA::Board::State::Empty ) ) {
-                    //found = true;
                     target.emplace( i + 1, j + 1 );
                     target.emplace( i + 2, j + 2 );
                     if ( j + 3 < enemyBoard.size() ) 
                         target.emplace( i + 3, j + 3 );
                 }
                 else if ( j == enemyBoard.size() - 1 || ( j > 1 && j < enemyBoard.size() - 1 && enemyBoard[i][j + 1] == TA::Board::State::Empty ) ) {
-                    //found = true;
                     target.emplace( i + 1, j - 1 );
                     target.emplace( i + 2, j - 2 );
                     if ( j - 3 >= 0 ) 
@@ -223,14 +220,12 @@ public:
             }
             else if ( i == enemyBoard.size() - 1 ) {
                 if ( j == 0 || ( j > 0 && j < enemyBoard.size() - 2 && enemyBoard[i][j - 1] == TA::Board::State::Empty ) ) {
-                    //found = true;
                     target.emplace( i - 1, j + 1 );
                     target.emplace( i - 2, j + 2 );
                     if ( j + 3 < enemyBoard.size() ) 
                         target.emplace( i - 3, j + 3 );
                 }
                 else if ( j == enemyBoard.size() - 1 || ( j > 1 && j < enemyBoard.size() - 1 && enemyBoard[i][j + 1] == TA::Board::State::Empty ) ) {
-                    //found = true;
                     target.emplace( i - 1, j - 1 );
                     target.emplace( i - 2, j - 2 );
                     if ( j - 3 >= 0 ) 
@@ -239,7 +234,6 @@ public:
             }
             // up and left
             else if ( enemyBoard[i - 1][j] == TA::Board::State::Empty && enemyBoard[i][j - 1] == TA::Board::State::Empty ) { 
-                //found = true;
                 target.emplace( i + 1, j + 1 );
                 target.emplace( i + 2, j + 2 );
                 if ( i + 3 < enemyBoard.size() && j + 3 < enemyBoard.size() ) 
@@ -247,7 +241,6 @@ public:
             }
             // down and left
             else if ( enemyBoard[i + 1][j] == TA::Board::State::Empty && enemyBoard[i][j - 1] == TA::Board::State::Empty ) {
-                //found = true;
                 target.emplace( i - 1, j + 1 );
                 target.emplace( i - 2, j + 2 );
                 if ( i - 3 >= 0 && j + 3 < enemyBoard.size() ) 
@@ -255,7 +248,6 @@ public:
             }
             // down and right
             else if ( enemyBoard[i + 1][j] == TA::Board::State::Empty && enemyBoard[i][j + 1] == TA::Board::State::Empty ) {
-                //found = true;
                 target.emplace( i - 1, j - 1 );
                 target.emplace( i - 2, j - 2 );
                 if ( i - 3 >= 0 && j - 3 >= 0 ) 
@@ -263,13 +255,11 @@ public:
             }
             // up and right
             else if ( enemyBoard[i - 1][j] == TA::Board::State::Empty && enemyBoard[i][j + 1] == TA::Board::State::Empty ) {
-                //found = true;
                 target.emplace( i + 1, j - 1 );
                 target.emplace( i + 2, j - 2 );
                 if ( i + 3 < enemyBoard.size() && j - 3 >= 0 ) 
                     target.emplace( i + 3, j - 3 );
             }
         }
-        //return found;
     }
 };
